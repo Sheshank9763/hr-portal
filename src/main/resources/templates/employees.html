@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HR Portal</title>
+</head>
+<body>
+    <h1>Employee List</h1>
+    <form action="#" th:action="@{/employees}" method="post">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="department" placeholder="Department" required>
+        <button type="submit">Add Employee</button>
+    </form>
+    <ul>
+        <li th:each="employee : ${employees}">
+            <span th:text="${employee.name}">Employee Name</span> - 
+            <span th:text="${employee.department}">Department</span>
+            <form action="#" th:action="@{/employees/delete/{id}(id=${employee.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </ul>
+</body>
+</html>
