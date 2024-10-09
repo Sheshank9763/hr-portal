@@ -5,5 +5,23 @@ services:
     build: .
     ports:
       - "8080:8080"
+    networks:
+      - hr-network
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hr_portal_db
+    ports:
+      - "5432:5432"
+    networks:
+      - hr-network
+
+networks:
+  hr-network:
+    driver: bridge
+
